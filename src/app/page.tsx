@@ -1,6 +1,7 @@
 import { Brief } from "@/components/Brief";
 import { DecisionCard } from "@/components/DecisionCard";
 import { Timeline } from "@/components/Timeline";
+import { LogList } from "@/components/LogList";
 import { BUDGET, buildBrief, loadEvents, loadSteering, pendingDecisions } from "@/lib/events";
 
 export const dynamic = "force-dynamic";
@@ -53,8 +54,8 @@ export default function Home() {
 
       <section>
         <h2 className="mb-1 text-lg font-semibold">Everything, in order ({events.length})</h2>
-        <p className="mb-3 text-sm text-zinc-500">The full log. Expand any entry for the agent&apos;s exact words.</p>
-        <Timeline events={events} all={events} />
+        <p className="mb-3 text-sm text-zinc-500">Every message, one line each. Tap one for the agent&apos;s exact words.</p>
+        <LogList events={events} />
       </section>
     </main>
   );
