@@ -2,7 +2,7 @@
 // real page so nothing jumps when the data arrives.
 export default function Loading() {
   return (
-    <main className="mx-auto w-full max-w-3xl space-y-10 px-4 pb-20 pt-5" aria-busy="true">
+    <main className="safe-x safe-b mx-auto w-full max-w-3xl space-y-10 pt-4 sm:pt-5" aria-busy="true">
       <div className="h-4 w-64 animate-pulse rounded bg-cream" />
       <div>
         <div className="h-12 w-72 animate-pulse rounded bg-cream" />

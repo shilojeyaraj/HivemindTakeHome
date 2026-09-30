@@ -97,7 +97,7 @@ export function Morning({ events, serverSteering }: { events: AgentEvent[]; serv
 
   return (
     <>
-      <nav className="sticky top-0 z-10 -mx-4 flex gap-2 overflow-x-auto bg-bg/85 px-4 py-2 text-xs backdrop-blur sm:hidden">
+      <nav className="sticky top-0 z-10 -mx-4 flex gap-2 overflow-x-auto bg-bg/90 px-4 py-2 text-xs backdrop-blur [scrollbar-width:none] sm:hidden [&::-webkit-scrollbar]:hidden">
         <Jump href="#needs-you" label="Needs you" count={decisions.length} tone={decisions.length ? "orange" : undefined} />
         <Jump href="#problems" label="Problems" count={problems.length} tone={problems.length ? "maroon" : undefined} />
         <Jump href="#alone" label="Decided alone" count={autos.length} />
@@ -158,7 +158,7 @@ function Section({ id, title, count, sub, children }: { id?: string; title: stri
 function Jump({ href, label, count, tone }: { href: string; label: string; count: number; tone?: "orange" | "maroon" }) {
   const cls = tone === "orange" ? "bg-orange-soft text-orange" : tone === "maroon" ? "bg-maroon-soft text-maroon" : "bg-cream text-ink-2";
   return (
-    <a href={href} className={`shrink-0 rounded-full px-3 py-1.5 font-medium ${cls}`}>
+    <a href={href} className={`inline-flex min-h-9 shrink-0 items-center gap-1.5 rounded-full px-3.5 font-medium ${cls}`}>
       {label} <span className="num">{count}</span>
     </a>
   );

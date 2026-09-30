@@ -7,7 +7,7 @@ export default function Home() {
   const events = loadEvents();
   const steering = loadSteering();
   return (
-    <main className="mx-auto w-full max-w-3xl space-y-10 px-4 pb-20 pt-5">
+    <main className="safe-x safe-b mx-auto w-full max-w-3xl space-y-10 pt-4 sm:pt-5">
       <header className="text-sm">
         <div className="flex items-center gap-2">
           <span className="inline-block h-2.5 w-2.5 shrink-0 rounded-full bg-orange" />

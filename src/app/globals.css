@@ -78,6 +78,16 @@ body {
 }
 
 .num { font-variant-numeric: tabular-nums; }
+
+/* Phones */
+button, a, summary { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+pre, blockquote, code { overflow-wrap: anywhere; word-break: break-word; }
+@media (max-width: 639px) {
+  input, textarea, select { font-size: 16px; } /* stops iOS zooming into the field */
+  body { background-size: 100% 260px; }
+}
+.safe-b { padding-bottom: max(5rem, env(safe-area-inset-bottom, 0px) + 3rem); }
+.safe-x { padding-left: max(1rem, env(safe-area-inset-left, 0px)); padding-right: max(1rem, env(safe-area-inset-right, 0px)); }
 .serif { font-family: var(--font-serif), Georgia, serif; }
 
 /* Agent tags, in the agent's own words, mono like a severity label */

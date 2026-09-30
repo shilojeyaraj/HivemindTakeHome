@@ -45,7 +45,7 @@ export function RawEvidence({ event, label = "What the agent actually said" }: {
   if (!event.reasoning && !event.sourceEvidence) return null;
   return (
     <details className="group mt-3 text-sm">
-      <summary className="inline-flex cursor-pointer items-center gap-1.5 text-muted hover:text-ink">
+      <summary className="inline-flex min-h-9 cursor-pointer items-center gap-1.5 text-muted hover:text-ink sm:min-h-0">
         <span className="inline-block w-3 text-center group-open:hidden">+</span>
         <span className="hidden w-3 text-center group-open:inline-block">&ndash;</span>
         {label}

@@ -53,7 +53,7 @@ export function DecisionCard({ event, budget, onAct }: Props) {
                 </div>
                 <button
                   onClick={() => onAct("approve", o.id, note || undefined)}
-                  className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition active:scale-[0.98] ${o.recommended ? "bg-orange text-orange-ink hover:brightness-95" : "bg-cream text-ink hover:bg-cream-2"}`}
+                  className={`min-h-11 shrink-0 rounded-full px-4 py-2 text-sm font-medium transition active:scale-[0.98] sm:min-h-0 ${o.recommended ? "bg-orange text-orange-ink hover:brightness-95" : "bg-cream text-ink hover:bg-cream-2"}`}
                 >
                   Choose {o.id}
                 </button>
@@ -66,10 +66,10 @@ export function DecisionCard({ event, budget, onAct }: Props) {
       <div className="border-t border-line px-5 py-4">
         <Links links={event.links} />
         <div className={`flex flex-col gap-2 sm:flex-row ${event.links?.length ? "mt-3" : ""}`}>
-          <input value={note} onChange={(e) => setNote(e.target.value)} placeholder="Or tell the agent something else" className="min-w-0 flex-1 rounded-full border border-line bg-transparent px-4 py-2 text-sm placeholder:text-muted focus:border-line-strong focus:outline-none" />
+          <input value={note} onChange={(e) => setNote(e.target.value)} placeholder="Or tell the agent something else" className="min-h-11 min-w-0 flex-1 rounded-full border border-line bg-transparent px-4 py-2 text-sm placeholder:text-muted focus:border-line-strong focus:outline-none sm:min-h-0" />
           <div className="flex gap-2">
-            <button disabled={!note} onClick={() => onAct("redirect", undefined, note)} className="flex-1 rounded-full bg-cream px-4 py-2 text-sm font-medium hover:bg-cream-2 disabled:opacity-40 sm:flex-none">Redirect</button>
-            <button onClick={() => onAct("deny", undefined, note || undefined)} className="flex-1 rounded-full bg-cream px-4 py-2 text-sm font-medium hover:bg-cream-2 sm:flex-none">Deny all</button>
+            <button disabled={!note} onClick={() => onAct("redirect", undefined, note)} className="min-h-11 flex-1 rounded-full bg-cream px-4 py-2 text-sm font-medium hover:bg-cream-2 disabled:opacity-40 sm:min-h-0 sm:flex-none">Redirect</button>
+            <button onClick={() => onAct("deny", undefined, note || undefined)} className="min-h-11 flex-1 rounded-full bg-cream px-4 py-2 text-sm font-medium hover:bg-cream-2 sm:min-h-0 sm:flex-none">Deny all</button>
           </div>
         </div>
         <RawEvidence event={event} label="Why the agent asked, and what it actually said" />

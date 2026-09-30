@@ -20,7 +20,7 @@ export function LogList({ events }: { events: AgentEvent[] }) {
           <span className={`absolute -left-[5px] top-[7px] h-[9px] w-[9px] rounded-full ring-4 ring-bg ${DOT[e.kind]}`} />
           <span className="num absolute -left-[4.25rem] top-0 w-14 text-right font-mono text-[11px] text-muted sm:-left-20 sm:w-16">{clock(e.timestamp)}</span>
           <details className="group">
-            <summary className="cursor-pointer text-sm leading-6">
+            <summary className="cursor-pointer py-0.5 text-sm leading-6">
               <span className="mr-2 inline-block align-middle"><Tag event={e} /></span>
               <span className="font-medium group-hover:underline group-hover:decoration-line group-hover:underline-offset-2">{e.title}</span>
             </summary>
