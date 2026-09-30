@@ -27,7 +27,7 @@ export function LogList({ events }: { events: AgentEvent[] }) {
           <details className="group">
             <summary className="flex cursor-pointer items-baseline gap-3 px-4 py-2.5 text-sm">
               <span className="w-16 shrink-0 font-mono text-xs text-zinc-500">{clock(e.timestamp)}</span>
-              <span className={`w-28 shrink-0 text-xs uppercase tracking-wide ${KIND_COLOR[e.kind]}`}>{KIND_LABEL[e.kind]}</span>
+              <span className={`w-28 shrink-0 text-xs uppercase tracking-wide ${KIND_COLOR[e.kind]}`}>{e.corrects && e.kind === "error" ? "Correction" : KIND_LABEL[e.kind]}</span>
               <span className="min-w-0 flex-1 truncate group-open:whitespace-normal">{e.title}</span>
             </summary>
             <div className="px-4 pb-4 pl-4 text-sm sm:pl-[calc(4rem+7rem+1.5rem)]">

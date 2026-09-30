@@ -21,7 +21,7 @@ export function Timeline({ events, all }: { events: AgentEvent[]; all?: AgentEve
         return (
           <li key={e.id} id={e.id} className={`rounded-lg border p-4 text-sm ${e.kind === "error" ? "border-red-300 dark:border-red-900" : e.kind === "auto_action" ? "border-amber-300 dark:border-amber-900" : "border-zinc-200 dark:border-zinc-800"}`}>
             <div className="flex items-baseline justify-between gap-3">
-              <span className={`text-xs uppercase tracking-wide ${e.kind === "error" ? "text-red-600 dark:text-red-400" : e.kind === "auto_action" ? "text-amber-700 dark:text-amber-400" : "text-zinc-500"}`}>{KIND_LABEL[e.kind]}</span>
+              <span className={`text-xs uppercase tracking-wide ${e.kind === "error" ? "text-red-600 dark:text-red-400" : e.kind === "auto_action" ? "text-amber-700 dark:text-amber-400" : "text-zinc-500"}`}>{e.corrects && e.kind === "error" ? "Correction" : KIND_LABEL[e.kind]}</span>
               <span className="font-mono text-xs text-zinc-500">{clock(e.timestamp)}</span>
             </div>
             <div className="mt-1 font-medium">{e.title}</div>
