@@ -1,0 +1,180 @@
+[
+  {
+    "id": "instinct-001",
+    "agent": "instinct",
+    "timestamp": "2026-09-29T21:02:00.000Z",
+    "kind": "update",
+    "title": "Started the trip search",
+    "summary": "Confirmed the route, dates, and $1,500 hard cap. Committed to buying nothing without approval.",
+    "sourceEvidence": "[5:02 PM] UPDATE: Started on your reading week trip: Toronto → New York → Boston → Toronto, Sat Oct 10 to Sun Oct 18, $1,500 hard cap. Nothing gets bought; purchases will wait as DECISIONs for the morning."
+  },
+  {
+    "id": "instinct-002",
+    "agent": "instinct",
+    "timestamp": "2026-09-29T21:05:00.000Z",
+    "kind": "update",
+    "title": "Found nonstop flights for about $511",
+    "summary": "Air Canada nonstops both ways: Toronto to LaGuardia Oct 10 at 4:35 PM, Boston to Billy Bishop Oct 18 at 9:40 AM. A 12:45 PM return instead would add about $122. Bag and seat fees not included yet.",
+    "sourceEvidence": "[5:05 PM] UPDATE: First flight read: both legs nonstop for about CA$511 (Air Canada YYZ-LGA Oct 10, 4:35-6:10 PM; BOS-Billy Bishop Oct 18, 9:40-11:36 AM). A later BOS-YYZ return at 12:45-2:33 PM brings it to CA$633. Baggage and seat fees not included yet. Checking hotels and NYC-Boston transport next. Nothing held or bought.",
+    "links": [
+      "https://www.google.com/travel/flights/search?tfs=CBwQAhpKEgoyMDI2LTEwLTEwIh8KA1lZWhIKMjAyNi0xMC0xMBoDTEdBKgJBQzIDNzE2agwIAxIIL20vMGg3aDZyDQgDEgkvbS8wMl8yODYaKBIKMjAyNi0xMC0xOGoMCAMSCC9tLzAxY3hfcgwIAxIIL20vMGg3aDZAAUgBcAGCAQsI____________AZgBAw%26tfu=CnBDalJJY210dmFsVmpWM3BuU2sxQlFXWm1RMmRDUnkwdExTMHRMUzB0Y0dwaWFuTXhNRUZCUVVGQlIzRTRTamhqVFd4Rk1USkJFZ2RCUXpjeE5pTXlHZ3NJelk0REVBSWFBME5CUkRnY2NQS1lBZz09EgIIACIDCgEw"
+    ],
+    "reasoning": "The agent priced a later return but reported it as information rather than as a choice. The interface treats this as a tradeoff the user may want to reopen, since the user said they prefer later departures.",
+    "warnings": [
+      "Return is a 9:40 AM flight. You said you prefer later departures. The later one costs about $122 more."
+    ]
+  },
+  {
+    "id": "instinct-003",
+    "agent": "instinct",
+    "timestamp": "2026-09-29T21:06:00.000Z",
+    "kind": "auto_action",
+    "title": "Chose a 4 night / 4 night split with a bus between cities",
+    "summary": "NYC Oct 10 to 14, Boston Oct 14 to 18, daytime ground transport on the 14th.",
+    "sourceEvidence": "[5:06 PM] AUTO: Planning 4 nights in NYC (Oct 10-14) and 4 in Boston (Oct 14-18), with a daytime train or bus between them on the 14th. Why: even split, and it skips an extra flight and airport time. Undo: it's only a plan, nothing booked, so just tell me a different split. Heads up: NYC hotel prices may push against the cap. If the only way under $1,500 is a hostel, I'll bring it to you as a DECISION rather than pick it.",
+    "reasoning": "Even split, and it avoids an extra flight and airport time. Nothing was booked.",
+    "autoResolved": {
+      "choice": "4 nights NYC, 4 nights Boston, daytime bus or train on Oct 14",
+      "reversible": true
+    }
+  },
+  {
+    "id": "instinct-004",
+    "agent": "instinct",
+    "timestamp": "2026-09-29T21:08:00.000Z",
+    "kind": "update",
+    "title": "NYC hostel sold out",
+    "summary": "HI New York City on the Upper West Side is sold out Oct 10 to 14. Looking at other stays.",
+    "sourceEvidence": "[5:08 PM] UPDATE: HI New York City (Upper West Side, budget option) is sold out Oct 10-14, so it's off the list. Checking other NYC stays and Boston."
+  },
+  {
+    "id": "instinct-005",
+    "agent": "instinct",
+    "timestamp": "2026-09-29T21:09:00.000Z",
+    "kind": "update",
+    "title": "Boston hostel sold out",
+    "summary": "HI Boston is sold out Oct 14 to 18. Looking at other budget stays in both cities.",
+    "sourceEvidence": "[5:09 PM] UPDATE: HI Boston is sold out Oct 14-18 too. Moving on to other budget stays in both cities."
+  },
+  {
+    "id": "instinct-006",
+    "agent": "instinct",
+    "timestamp": "2026-09-29T21:12:00.000Z",
+    "kind": "error",
+    "title": "Budget is tight",
+    "summary": "8 nights of private central rooms plus about $511 in flights is hard to fit under $1,500 CAD. Central Manhattan starts near $182 a night and hostels are sold out. Still searching.",
+    "sourceEvidence": "[5:12 PM] ERROR: 8 nights of private central hotels plus flights is looking hard to fit under $1,500 (I'm treating that as CAD). Central Manhattan starts around CA$182/night, Boston's cheap listings aren't vetted yet, and the hostels are sold out. With ~CA$511 in flights, that leaves very little for Boston. Still digging for real options; if it can't fit, you'll get a DECISION with the tradeoffs in the morning.",
+    "confidence": "medium"
+  },
+  {
+    "id": "instinct-007",
+    "agent": "instinct",
+    "timestamp": "2026-09-29T21:14:00.000Z",
+    "kind": "error",
+    "title": "Amtrak blocked the agent",
+    "summary": "Amtrak's site showed a security check, so there is no train fare for Oct 14. The agent priced buses instead.",
+    "sourceEvidence": "[5:14 PM] ERROR: Amtrak's site blocked me with a security check, so no Oct 14 train fare yet. Pricing buses instead and still working on stays.",
+    "reasoning": "Bot detection on a booking site. The agent fell back to a different mode of transport rather than stopping."
+  },
+  {
+    "id": "instinct-008",
+    "agent": "instinct",
+    "timestamp": "2026-09-29T21:17:00.000Z",
+    "kind": "auto_action",
+    "title": "Chose an 11 AM FlixBus, NYC to Boston, about US$24",
+    "summary": "Oct 14, 11:00 AM from Canal St to Boston South Station, arriving 4:00 PM. A 1:15 PM departure from Hudson Yards is US$11 more. Nothing booked.",
+    "sourceEvidence": "[5:17 PM] AUTO: Penciled in the FlixBus for Oct 14: 11:00 AM Canal St → Boston South Station, arrives 4:00 PM, US$23.98. Why: cheapest daytime option, downtown to downtown. The 1:15 PM from Hudson Yards is US$11 more if you'd rather have a slower morning. Undo: nothing's booked, just tell me a different time or mode.",
+    "links": [
+      "https://shop.flixbus.com/search?departureCity=c0a47c54-53ea-46dc-984b-b764fc0b2fa9&arrivalCity=eeff627f-2fda-4e75-8468-783d47955b3a&route=New+York%2C+NY-Boston%2C+MA&rideDate=14.10.2026&adult=1&_locale=en_US&departureCountryCode=US&arrivalCountryCode=US&features%5Bfeature.enable_distribusion%5D=1&features%5Bfeature.train_cities_only%5D=0&features%5Bfeature.station_search%5D=0&features%5Bfeature.station_search_recommendation%5D=0&features%5Bwebc_search_engine_station_importance_filter%5D=0&features%5Bfeature.darken_page%5D=1"
+    ],
+    "reasoning": "Cheapest daytime option, downtown to downtown.",
+    "autoResolved": {
+      "choice": "FlixBus 11:00 AM Oct 14, Canal St to South Station, US$23.98",
+      "reversible": true
+    }
+  },
+  {
+    "id": "instinct-009",
+    "agent": "instinct",
+    "timestamp": "2026-09-29T21:20:00.000Z",
+    "kind": "update",
+    "title": "Boston is the expensive half",
+    "summary": "Central Boston hotels for Oct 14 to 18 cost more than the whole budget on their own. The Revolution Hotel is $2,351 all in. Cheaper results are in the suburbs, which breaks the walkable rule. Pricing closer budget rooms next.",
+    "sourceEvidence": "[5:20 PM] UPDATE: Boston is the expensive half. Central hotels for Oct 14-18 run well over the whole budget on their own (Revolution Hotel is CA$2,351 all-in), and the cheaper results are out in the suburbs, which breaks your walkable rule. Now pricing closer budget rooms and shorter-trip versions that could fit."
+  },
+  {
+    "id": "instinct-010",
+    "agent": "instinct",
+    "timestamp": "2026-09-29T21:38:00.000Z",
+    "kind": "decision",
+    "title": "Full trip priced: 4 options, 2 fit the budget",
+    "summary": "Nothing held or booked. Every option uses the same Air Canada nonstops and the 11 AM FlixBus. The difference is fare class and whether the Boston room is private or a dorm.",
+    "sourceEvidence": "[5:38 PM] DECISION: Full trip is priced. Nothing held or booked. All-in CAD, flights + bus + 8 nights:\nA. CA$1,429 (fits): Basic fare + private rooms in both cities. Catch: personal item only (no carry-on) and no seat pick, so no guaranteed window.\nB. CA$1,372 (fits, cheapest): Basic fare + private room NYC + shared dorm in Boston. Saves $57 vs A for a big comfort drop.\nC. CA$1,652 (over by ~$152): Standard fare (carry-on, 1st checked bag, free window seat pick) + private rooms in both cities.\nD. CA$1,595 (over by ~$95): Standard fare + private room NYC + Boston dorm.\nSame in all: Air Canada nonstops, YYZ-LGA Sat Oct 10 4:35-6:10 PM and BOS-Billy Bishop Sun Oct 18 9:40-11:36 AM, plus the 11 AM FlixBus on Oct 14.\nMy pick: A, if you can pack 8 days into a backpack. It's the only way under $1,500 with private rooms. If you want a real bag and a window seat, C, and raise the cap ~$150.\nDeadline: none held; fares and rooms can move or sell out anytime, so ideally decide tomorrow morning.\nTwo things to know about the rooms: NYC Manhattan hotels started around $864 for 4 nights, so the NYC room is an Airbnb private room in Newark, NJ (CA$388, ~25-30 min to Manhattan by PATH train). That bends your central rule, so say if it's a dealbreaker. Boston is a private room with private bath in Medford (CA$497, free cancellation, ~15 min on the Red Line). Also the return is a morning flight; later ones cost more.\nStandard fare on Google Flights (the Basic fare is the same flights for CA$511):",
+    "links": [
+      "https://www.airbnb.ca/rooms/1437180375511819025",
+      "https://www.airbnb.ca/rooms/15164878"
+    ],
+    "reasoning": "The agent recommends A because it is the only way under $1,500 with private rooms in both cities. The cost is no carry-on and no guaranteed window seat. Getting a window seat and a real bag means going about $152 over the cap.",
+    "confidence": "medium",
+    "warnings": [
+      "NYC room is in Newark, NJ, about 50 min door to Manhattan. You asked for central and walkable.",
+      "Option A has no seat selection, so no guaranteed window seat.",
+      "Boston room is in Medford, about 30 min to downtown."
+    ],
+    "options": [
+      {
+        "id": "A",
+        "label": "A. Basic fare, private rooms in both cities",
+        "total": 1429,
+        "costDelta": 57,
+        "fitsBudget": true,
+        "tradeoff": "Personal item only, no carry-on, no seat pick so no guaranteed window. $71 under budget.",
+        "recommended": true
+      },
+      {
+        "id": "B",
+        "label": "B. Basic fare, private room NYC, shared dorm Boston",
+        "total": 1372,
+        "costDelta": 0,
+        "fitsBudget": true,
+        "tradeoff": "Cheapest. Saves $57 versus A for a shared dorm in Boston."
+      },
+      {
+        "id": "C",
+        "label": "C. Standard fare, private rooms in both cities",
+        "total": 1652,
+        "costDelta": 280,
+        "fitsBudget": false,
+        "tradeoff": "Carry-on, one checked bag, and a free window seat pick. About $152 over budget."
+      },
+      {
+        "id": "D",
+        "label": "D. Standard fare, private room NYC, dorm Boston",
+        "total": 1595,
+        "costDelta": 223,
+        "fitsBudget": false,
+        "tradeoff": "Window seat and bags, but a dorm in Boston. About $95 over budget."
+      }
+    ]
+  },
+  {
+    "id": "instinct-011",
+    "agent": "instinct",
+    "timestamp": "2026-09-29T22:21:00.000Z",
+    "kind": "error",
+    "title": "Agent corrected itself on the Boston commute",
+    "summary": "The earlier claim of about 15 min on the Red Line was not verified. The Medford room is near Ball Square and Tufts on the Green Line. Real time to be confirmed.",
+    "sourceEvidence": "[6:21 PM] ERROR: Correction on the Boston room: I said \"~15 min on the Red Line,\" and that wasn't verified. The listing is near Ball Square / Tufts, which are Green Line stops (Davis Sq on the Red Line is also nearby). I'll confirm the exact walk and ride time before you decide.",
+    "corrects": "instinct-010"
+  },
+  {
+    "id": "instinct-012",
+    "agent": "instinct",
+    "timestamp": "2026-09-29T22:23:00.000Z",
+    "kind": "update",
+    "title": "Verified commute times",
+    "summary": "Boston room: 4 to 5 min walk to Ball Square, about 30 min to downtown. NYC room in Newark: about 50 min door to Manhattan by PATH. Options and totals unchanged.",
+    "sourceEvidence": "[6:23 PM] UPDATE: Verified commute times (Google Maps, weekday morning):\n- Boston room (Medford): 4-5 min walk to Ball Square (Green Line), about 30 min door to downtown.\n- NYC room (Newark): walk or short bus to Newark Penn, then PATH, about 50 min door to Manhattan. That's the real cost of the cheap NYC room.\nTotals and options unchanged. No action needed until morning.",
+    "corrects": "instinct-010"
+  }
+]
