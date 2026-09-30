@@ -28,7 +28,7 @@ export function Timeline({ events, all }: { events: AgentEvent[]; all?: AgentEve
             <p className="text-zinc-600 dark:text-zinc-400">{e.summary}</p>
             {corrected && (
               <p className="mt-1 text-xs text-zinc-500">
-                Corrects <a href={`#${corrected.id}`} className="underline">{corrected.title}</a> ({clock(corrected.timestamp)})
+                <a href={`#${corrected.id}`} className="underline">Corrects its {clock(corrected.timestamp)} message</a>
               </p>
             )}
             {e.spendDelta ? <p className="mt-1 text-xs">Charged or held: {money(e.spendDelta)}</p> : null}

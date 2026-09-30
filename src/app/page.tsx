@@ -16,7 +16,14 @@ export default function Home() {
   const autos = events.filter((e) => e.kind === "auto_action" && e.autoResolved?.reversible);
 
   return (
-    <main className="mx-auto w-full max-w-3xl space-y-8 px-4 py-8">
+    <main className="mx-auto w-full max-w-3xl space-y-8 px-4 py-6">
+      <header className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+        <div>
+          <div className="text-xs uppercase tracking-wide text-zinc-500">Reading week trip</div>
+          <div className="text-sm text-zinc-700 dark:text-zinc-300">Toronto to New York to Boston, Oct 10 to 18</div>
+        </div>
+        <div className="text-xs text-zinc-500">Agent: Instinct. Amounts in CAD.</div>
+      </header>
       <Brief brief={brief} />
 
       <section>

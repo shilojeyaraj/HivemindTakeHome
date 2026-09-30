@@ -9,7 +9,7 @@ export function Brief({ brief }: { brief: TripBrief }) {
       <h1 className="text-xl font-semibold">Good morning</h1>
       <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
         {brief.firstEventAt
-          ? `Your agent worked from ${clock(brief.firstEventAt)} to ${clock(brief.lastEventAt)}. It bought nothing.`
+          ? `Worked ${clock(brief.firstEventAt)} to ${clock(brief.lastEventAt)}. Bought nothing.`
           : "No agent activity recorded yet."}
       </p>
       <dl className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4">

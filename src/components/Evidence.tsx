@@ -3,13 +3,12 @@ import type { AgentEvent } from "@/lib/types";
 export function Warnings({ warnings }: { warnings?: string[] }) {
   if (!warnings?.length) return null;
   return (
-    <ul className="mt-3 space-y-1">
-      {warnings.map((w) => (
-        <li key={w} className="rounded-md bg-amber-50 px-3 py-1.5 text-xs text-amber-900 dark:bg-amber-950 dark:text-amber-200">
-          Bends your rules: {w}
-        </li>
-      ))}
-    </ul>
+    <div className="mt-3 rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-950 dark:border-amber-800 dark:bg-amber-950/50 dark:text-amber-100">
+      <div className="text-xs font-semibold uppercase tracking-wide text-amber-800 dark:text-amber-300">Bends your rules</div>
+      <ul className="mt-1 list-disc space-y-1 pl-4">
+        {warnings.map((w) => <li key={w}>{w}</li>)}
+      </ul>
+    </div>
   );
 }
 
