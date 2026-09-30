@@ -1,6 +1,106 @@
 @import "tailwindcss";
 
+/* One small token set. Light is warm paper, dark is deep ink. One accent for
+   attention (amber), one for "fits" (green), one for problems (red). */
+:root {
+  --bg: #f5f2ec;
+  --surface: #ffffff;
+  --surface-2: #f0ede6;
+  --ink: #1c1b18;
+  --ink-2: #4f4c45;
+  --muted: #7d796f;
+  --line: #e2ddd2;
+  --line-strong: #1c1b18;
+  --accent: #b45309;
+  --accent-bg: #fdf3e3;
+  --accent-line: #f2c98a;
+  --ok: #047857;
+  --ok-bg: #e6f5ee;
+  --bad: #b42318;
+  --bad-bg: #fbeae8;
+  --bad-line: #f3b5ad;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1013;
+    --surface: #171a1f;
+    --surface-2: #1f232a;
+    --ink: #ece9e2;
+    --ink-2: #bdb8ad;
+    --muted: #8d897f;
+    --line: #2a2e36;
+    --line-strong: #ece9e2;
+    --accent: #f5b04c;
+    --accent-bg: #2a2010;
+    --accent-line: #6b4a12;
+    --ok: #4ade80;
+    --ok-bg: #10261b;
+    --bad: #f87171;
+    --bad-bg: #2b1414;
+    --bad-line: #7a2a2a;
+  }
+}
+
 @theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-bg: var(--accent-bg);
+  --color-accent-line: var(--accent-line);
+  --color-ok: var(--ok);
+  --color-ok-bg: var(--ok-bg);
+  --color-bad: var(--bad);
+  --color-bad-bg: var(--bad-bg);
+  --color-bad-line: var(--bad-line);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+html {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-feature-settings: "tnum" 1, "cv11" 1;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+details > summary::before {
+  content: "+";
+  display: inline-block;
+  width: 1em;
+  color: var(--muted);
+}
+details[open] > summary::before {
+  content: "\2013";
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+.rise {
+  animation: rise 180ms ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rise { animation: none; }
 }

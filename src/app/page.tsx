@@ -1,71 +1,21 @@
-import { Brief } from "@/components/Brief";
-import { DecisionCard } from "@/components/DecisionCard";
-import { Timeline } from "@/components/Timeline";
-import { LogList } from "@/components/LogList";
-import { Decided } from "@/components/Decided";
-import { BUDGET, buildBrief, loadEvents, loadSteering, pendingDecisions } from "@/lib/events";
+import { Morning } from "@/components/Morning";
+import { loadEvents, loadSteering } from "@/lib/events";
 
 export const dynamic = "force-dynamic";
 
 export default function Home() {
   const events = loadEvents();
   const steering = loadSteering();
-  const brief = buildBrief(events, steering);
-  const decisions = pendingDecisions(events, steering);
-  const problems = events.filter(
-    (e) => e.kind === "error" || (e.kind === "auto_action" && e.autoResolved && !e.autoResolved.reversible),
-  );
-  const autos = events.filter((e) => e.kind === "auto_action" && e.autoResolved?.reversible);
-
   return (
-    <main className="mx-auto w-full max-w-3xl space-y-8 px-4 py-6">
+    <main className="mx-auto w-full max-w-3xl space-y-8 px-4 pb-16 pt-5">
       <header className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
         <div>
-          <div className="text-xs uppercase tracking-wide text-zinc-500">Reading week trip</div>
-          <div className="text-sm text-zinc-700 dark:text-zinc-300">Toronto to New York to Boston, Oct 10 to 18</div>
+          <div className="text-[11px] font-medium uppercase tracking-wider text-muted">Reading week trip</div>
+          <div className="text-sm text-ink-2">Toronto to New York to Boston, Oct 10 to 18</div>
         </div>
-        <div className="text-xs text-zinc-500">Agent: Instinct. Amounts in CAD.</div>
+        <div className="text-xs text-muted">Agent: Instinct. Amounts in CAD.</div>
       </header>
-      <Brief brief={brief} />
-
-      <section>
-        <h2 className="mb-3 text-lg font-semibold">Needs you ({decisions.length})</h2>
-        {decisions.length === 0 ? (
-          <p className="text-sm text-zinc-500">Nothing waiting on you.</p>
-        ) : (
-          <div className="space-y-4">{decisions.map((d) => <DecisionCard key={d.id} event={d} budget={BUDGET} />)}</div>
-        )}
-      </section>
-
-      {steering.length > 0 && (
-        <section>
-          <h2 className="mb-1 text-lg font-semibold">You decided ({steering.length})</h2>
-          <p className="mb-3 text-sm text-zinc-500">Instinct has no API, so each decision becomes a chat message. Status updates when the agent replies.</p>
-          <Decided events={events} steering={steering} />
-        </section>
-      )}
-
-      {problems.length > 0 && (
-        <section>
-          <h2 className="mb-1 text-lg font-semibold">Problems it hit ({problems.length})</h2>
-          <p className="mb-3 text-sm text-zinc-500">Things that went wrong or that the agent could not verify. Worth reading before you choose.</p>
-          <Timeline events={problems} all={events} />
-        </section>
-      )}
-
-      {autos.length > 0 && (
-        <section>
-          <h2 className="mb-1 text-lg font-semibold">Decided on its own ({autos.length})</h2>
-          <p className="mb-3 text-sm text-zinc-500">Reversible choices the agent made without asking. Redirect any of them from the decision above.</p>
-          <Timeline events={autos} all={events} />
-        </section>
-      )}
-
-      <section>
-        <h2 className="mb-1 text-lg font-semibold">Everything, in order ({events.length})</h2>
-        <p className="mb-3 text-sm text-zinc-500">Every message, one line each. Tap one for the agent&apos;s exact words.</p>
-        <LogList events={events} />
-      </section>
+      <Morning events={events} serverSteering={steering} />
     </main>
   );
 }

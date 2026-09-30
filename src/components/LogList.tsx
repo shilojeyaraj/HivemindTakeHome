@@ -10,38 +10,43 @@ const KIND_LABEL: Record<AgentEvent["kind"], string> = {
 };
 
 const KIND_COLOR: Record<AgentEvent["kind"], string> = {
-  update: "text-zinc-500",
-  decision: "text-zinc-900 dark:text-zinc-100",
-  auto_action: "text-amber-700 dark:text-amber-400",
-  error: "text-red-600 dark:text-red-400",
+  update: "text-muted",
+  decision: "text-ink",
+  auto_action: "text-accent",
+  error: "text-bad",
 };
 
 // Compact, one line per message. Everything is here, but nothing is repeated
-// at full size, since decisions, problems, and auto-actions already have
-// their own sections above.
+// at full size, since decisions, problems, and auto-actions have their own
+// sections above.
 export function LogList({ events }: { events: AgentEvent[] }) {
   return (
-    <ol className="divide-y divide-zinc-200 rounded-lg border border-zinc-200 bg-white dark:divide-zinc-800 dark:border-zinc-800 dark:bg-zinc-900">
+    <ol className="divide-y divide-line overflow-hidden rounded-2xl border border-line bg-surface">
       {events.map((e) => (
-        <li key={e.id} id={`log-${e.id}`}>
+        <li key={e.id} id={`log-${e.id}`} className="scroll-mt-20">
           <details className="group">
-            <summary className="flex cursor-pointer items-baseline gap-3 px-4 py-2.5 text-sm">
-              <span className="w-16 shrink-0 font-mono text-xs text-zinc-500">{clock(e.timestamp)}</span>
-              <span className={`w-28 shrink-0 text-xs uppercase tracking-wide ${KIND_COLOR[e.kind]}`}>{e.corrects && e.kind === "error" ? "Correction" : KIND_LABEL[e.kind]}</span>
-              <span className="min-w-0 flex-1 truncate group-open:whitespace-normal">{e.title}</span>
+            <summary className="flex cursor-pointer items-baseline gap-3 px-4 py-3 text-sm hover:bg-surface-2">
+              <span className="num w-16 shrink-0 font-mono text-xs text-muted">{clock(e.timestamp)}</span>
+              <span className={`hidden w-28 shrink-0 text-[11px] font-medium uppercase tracking-wider sm:inline ${KIND_COLOR[e.kind]}`}>
+                {e.corrects && e.kind === "error" ? "Correction" : KIND_LABEL[e.kind]}
+              </span>
+              <span className="min-w-0 flex-1 truncate group-open:whitespace-normal">
+                <span className={`mr-2 inline-block h-1.5 w-1.5 rounded-full align-middle sm:hidden ${e.kind === "error" ? "bg-bad" : e.kind === "auto_action" ? "bg-accent" : e.kind === "decision" ? "bg-ink" : "bg-line"}`} />
+                {e.title}
+              </span>
             </summary>
-            <div className="px-4 pb-4 pl-4 text-sm sm:pl-[calc(4rem+7rem+1.5rem)]">
-              <p className="text-zinc-600 dark:text-zinc-400">{e.summary}</p>
+            <div className="px-4 pb-4 text-sm sm:pl-[calc(4rem+7rem+2.5rem)]">
+              <p className="text-ink-2">{e.summary}</p>
               {e.autoResolved && (
-                <p className="mt-2 text-xs text-amber-800 dark:text-amber-300">
+                <p className="mt-2 text-xs text-accent">
                   Chose: {e.autoResolved.choice}. {e.autoResolved.reversible ? "Reversible." : "Not reversible."}
                 </p>
               )}
               <Warnings warnings={e.warnings} />
               <Links links={e.links} />
-              {e.reasoning && <p className="mt-3 text-zinc-700 dark:text-zinc-300">{e.reasoning}</p>}
+              {e.reasoning && <p className="mt-3 text-ink-2">{e.reasoning}</p>}
               {e.sourceEvidence && (
-                <blockquote className="mt-2 whitespace-pre-wrap border-l-2 border-zinc-300 pl-3 font-mono text-xs text-zinc-600 dark:border-zinc-700 dark:text-zinc-400">
+                <blockquote className="mt-2 whitespace-pre-wrap rounded-md bg-surface-2 px-3 py-2 font-mono text-xs leading-relaxed text-ink-2">
                   {e.sourceEvidence}
                 </blockquote>
               )}

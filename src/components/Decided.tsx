@@ -2,9 +2,9 @@ import type { AgentEvent, SteeringAction } from "@/lib/types";
 import { clock } from "@/lib/format";
 
 const STATUS: Record<SteeringAction["relayStatus"], { label: string; cls: string }> = {
-  pending: { label: "Sent to agent, waiting for it to confirm", cls: "bg-amber-100 text-amber-900 dark:bg-amber-950 dark:text-amber-200" },
-  sent: { label: "Sent to agent, waiting for it to confirm", cls: "bg-amber-100 text-amber-900 dark:bg-amber-950 dark:text-amber-200" },
-  acknowledged: { label: "Agent confirmed", cls: "bg-emerald-100 text-emerald-900 dark:bg-emerald-950 dark:text-emerald-200" },
+  pending: { label: "Recorded, not yet sent", cls: "bg-surface-2 text-muted" },
+  sent: { label: "Sent to agent, waiting for it to confirm", cls: "bg-accent-bg text-accent" },
+  acknowledged: { label: "Agent confirmed", cls: "bg-ok-bg text-ok" },
 };
 
 export function Decided({ events, steering }: { events: AgentEvent[]; steering: SteeringAction[] }) {
@@ -18,19 +18,19 @@ export function Decided({ events, steering }: { events: AgentEvent[]; steering: 
         const status = STATUS[s.relayStatus];
         const verb = s.action === "approve" ? "You chose" : s.action === "deny" ? "You denied all options for" : "You redirected";
         return (
-          <li key={s.eventId + s.at} className="rounded-xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900">
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-zinc-500">
+          <li key={s.eventId + s.at} className="rise rounded-2xl border border-line bg-surface p-5">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
               <span>{clock(s.at)}</span>
-              <span className={`rounded-full px-2 py-0.5 ${status.cls}`}>{status.label}</span>
+              <span className={`rounded-full px-2 py-0.5 font-medium ${status.cls}`}>{status.label}</span>
             </div>
-            <h3 className="mt-2 font-semibold">
+            <h3 className="mt-2 font-semibold tracking-tight">
               {verb}{option ? ` ${option.label}` : ""}
             </h3>
-            {event && <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{event.title}, asked at {clock(event.timestamp)}</p>}
+            {event && <p className="mt-1 text-sm text-ink-2">{event.title}, asked at {clock(event.timestamp)}</p>}
             {s.note && <p className="mt-1 text-sm">&ldquo;{s.note}&rdquo;</p>}
-            <div className="mt-3 rounded-md bg-zinc-100 p-3 dark:bg-zinc-800">
-              <div className="text-xs uppercase tracking-wide text-zinc-500">Message to agent</div>
-              <pre className="mt-1 whitespace-pre-wrap font-mono text-xs">{s.relayMessage}</pre>
+            <div className="mt-3 rounded-lg bg-surface-2 p-3">
+              <div className="text-[11px] font-medium uppercase tracking-wider text-muted">Message to agent</div>
+              <pre className="mt-1 whitespace-pre-wrap font-mono text-xs leading-relaxed">{s.relayMessage}</pre>
             </div>
           </li>
         );

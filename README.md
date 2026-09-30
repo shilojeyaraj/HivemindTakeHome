@@ -59,23 +59,52 @@ Every event in `data/events.json` comes from the real transcript in `data/raw/in
 
 ## The three questions
 
-### Autonomy boundary
+### 1. What can the agent decide alone overnight, and what waits?
 
-The agent may act alone when the action is **reversible, inside the stated rules, and cheap to undo.** Search, compare, shortlist, and free holds are always fine. Choosing how to split nights between cities is fine because it costs nothing to change. Anything that breaks a stated rule waits, and the interface names the rule it breaks. Anything non-refundable waits, on trip 1 without exception.
+The agent may act alone when the action is **reversible, inside the rules I stated, and cheap to undo.** Everything else waits, and the interface says which rule it would break.
 
-The boundary sits at reversibility because the cost of a wrong hold is zero and the cost of a wrong purchase is real money and a bad trip. Budget and preferences are the user's rules. The agent does not get to reinterpret them at 3 AM, and this run showed why: the only way under $1,500 was a room 50 minutes from the city, and the agent correctly queued that as a decision instead of taking it.
+Alone: search, compare, shortlist, place free holds, choose how to split nights between cities, pick the cheapest of two nearly identical options and say why. All of these cost nothing to reverse. In this run Instinct did exactly these: the 4/4 night split at 5:06 PM, the FlixBus at 5:17 PM. Both show up under "Decided on its own", each marked reversible, each with a redirect path.
 
-### The 3 AM layover
+Waits: any purchase, anything non-refundable, anything that breaks a stated rule (over budget, no window seat, a room 50 minutes from the city when I said central), and anything the user never priced. This run produced three of those. The Newark room bent "central and walkable". Option A gave up the window seat. The replacement Boston room came after the first one sold out. Instinct queued all three as decisions instead of taking them, which is the boundary holding.
 
-The only routing under budget has a six-hour layover. The agent should hold it if a free hold exists, then also find the best over-budget direct option and price the gap, then queue one decision: "Under budget with a 6 h layover, or direct for $N over." Recommendation stated, deadline shown if the hold expires. It should not book, because a six-hour layover is a quality tradeoff the user never priced.
+Why reversibility and not, say, a dollar threshold? Because the cost of a wrong hold is zero and the cost of a wrong purchase is real money and a bad trip. A dollar threshold would have let the agent book a $23 bus at 5:17 PM, which is cheap but not what I asked for. Reversibility also matches how people delegate to each other: "look into it and come back to me" is a different grant than "just do it".
 
-In the morning that card is at the top of "Needs you" because it has a deadline. If the hold expired while the user slept, the chip says "Expired 2 h ago" and the card says what the agent will do on approval (re-search). The user sees the two options, the exact dollar gap, and the reasoning. This run had a close cousin: the only way under budget was a Newark room. Instinct handled it the right way. It did not book, priced the alternatives, and flagged the rule it was bending.
+### 2. It is 3 AM, and the only routing under budget has a 6 hour layover
 
-### Trust over time
+The agent should:
 
-Autonomy expands per action type, based on the user's history of approving the agent's recommendation for that type. On trip 1 every irreversible action is a decision. After the user approves the agent's recommended hotel three times in a row without redirecting, the agent asks: "Next time, can I book hotels under $200 that match your preferences without asking?" The user says yes or no. Autonomy is offered, not taken.
+1. Hold it, if a free hold exists, so the price does not move while I sleep.
+2. Not book it. A 6 hour layover is a quality tradeoff I never priced. "Under $1,500" was a constraint, not permission to accept anything under $1,500.
+3. Find the best over-budget direct routing and price the gap, so I am choosing between two real options rather than approving one in the dark.
+4. Queue one decision: "Under budget with a 6 h layover in X, or direct for $N more and $M over your cap." Its recommendation stated. The hold's expiry as a hard deadline.
 
-Expanded autonomy never means less reporting. Every auto-action stays in the log with an undo path. A denial or redirect on an action type resets that type. Trust is earned slowly and lost fast, which is how people treat human assistants too. By trip 10 the brief for a routine trip is "Booked. $1,340 of $1,500. Nothing needs you," with the full log one tap away.
+In the morning that card is first in "Needs you" because it has the soonest deadline. The chip shows "Expires in 2 h" as a live countdown. If the hold died while I slept, the chip says "Expired 3 h ago" and the card says what the agent does on approval, which is re-search at today's prices. Both options show their total in green or red against the budget. The "Bends your rules" block above the options says "6 hour layover, you asked for direct" so I read the catch before I read the price.
+
+This run had the same shape twice. At 5:38 PM the only way under budget was a Newark room, and at 10:10 PM the Boston room sold out and the replacements were all 38 to 49 minutes out. Instinct did not book either. It priced the alternatives, named the rule it was bending, and waited. Its "deadline" was "rooms are selling fast" with no time attached, which is why the card shows the agent's own words when there is no timestamp, and sorts soft urgency below hard deadlines.
+
+### 3. Trip 1 versus trip 10: how does the agent earn autonomy?
+
+Per action type, based on my record of approving its recommendation for that type, and always offered rather than taken.
+
+Trip 1 is this one. Every irreversible action is a decision. The agent recommends, I approve, and the interface keeps the two separate: "Approved, not booked" is its own number in the brief, because approved is not the same as spent.
+
+After I approve the agent's recommended hotel three times in a row without redirecting, it asks: "Next time, can I book hotels under $200 that match your preferences without asking?" I say yes or no. That is a new rule, and it shows up in the same "Bends your rules" block if a later booking would break it. The grant is specific: hotels, under $200, matching preferences. It does not spill into flights.
+
+A denial or redirect on an action type resets that type. Trust is earned slowly and lost fast, which is how people treat human assistants, and it should be visible: the interface would show "Books hotels under $200 without asking, since trip 4" next to the brief, with a one-tap revoke.
+
+Expanded autonomy never means less reporting. On trip 10 every auto-booking still appears under "Decided on its own", with what was chosen, what was rejected, why, and how to undo it. The difference is that the brief for a routine trip reads "Booked. $1,340 of $1,500. Nothing needs you," and the log is one tap away instead of the whole screen.
+
+## What a person needs to feel in control
+
+Three things, and the interface is built around them in this order.
+
+**Nothing the agent did is hidden.** Every message it sent is in the log. Auto-actions and problems are pulled out and colored so they cannot be skimmed past. Every summary expands to the agent's exact words, so if the summary is wrong, I can see that too. The self-correction at 6:21 PM stays in the log as a correction that links to the message it fixes. An agent that quietly edited its earlier claim would feel less trustworthy than one that says "I was wrong about the Red Line."
+
+**The rules I set are the frame for everything the agent shows me.** "Bends your rules" is the most important element on the page. It turns the agent's honest-but-buried disclosure ("that bends your central rule, so say if it's a dealbreaker", 200 words into a message) into the first thing I read on a decision. Control is not about approving each click. It is about knowing, before I choose, exactly where the agent had to compromise on what I asked for.
+
+**Approving is cheap, and I can always say something else.** Choose, deny, or type a sentence. The message that goes back to the agent is shown, not hidden behind a spinner, so I know what I said. Latency is visible as state ("Sent to agent, waiting for it to confirm", then "Agent confirmed" with the agent's reply in the log), never as a blank screen.
+
+Delegation works when the person can predict what the delegate will do alone, see what it did, and cheaply correct it. The agent's job overnight is to move the trip as far as it can without crossing the line, and to leave the morning screen so clear that the person's first 90 seconds are spent deciding, not investigating.
 
 ## AI tools used
 
