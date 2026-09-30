@@ -99,6 +99,14 @@ Twelve messages in 81 minutes, then silence because every remaining step needed 
 - **It reported in CAD without being told.** All amounts in the interface are CAD.
 - **The Google Flights link preview said "Trip from Birmingham to anywhere".** A generic share card, not a wrong search, but on a phone it looks like a mistake. Links are shown as "Open on google.com" next to the agent's own words rather than as previews.
 
+### Second act (10:02 PM to 10:11 PM, after the user chose option A in the interface)
+
+- **Steering worked.** The relay message was pasted into Instinct at 10:02 PM. Instinct acknowledged at 10:06 PM and said it would re-check prices before booking.
+- **The Boston room had sold out.** Instinct reported it as an ERROR, re-verified the other three components, and queued a DECISION with three replacement rooms and full trip totals. It did not substitute on its own. This is the cleanest real example in the run of the autonomy boundary holding under pressure.
+- **Soft urgency.** "Rooms are selling fast (Medford went in 5 hours)" is a deadline without a time. Added `urgencyNote` to the event model, shown in the chip and sorted above decisions with no urgency but below hard deadlines.
+- **No card was ever saved.** The scenario says the agent has a card on file. Instinct did not, and asked how to pay only after approval. Its default, per-purchase phone approval with single-use cards, is stricter than what the assessment assumes. Recorded as a corrected assumption.
+- **The payment decision touches credentials.** The interface presents the choice but the card and Airbnb login go through Instinct's secure link, never through chat or this page. The card carries a warning saying exactly that.
+
 ## Constraints hit so far
 
 - Instinct is chat-only, no API or export. Steering is a relay. Data is a pasted transcript, normalized by `scripts/normalize.ts` with hand-written enrichments in `data/enrichments.json`. Source text is never edited.

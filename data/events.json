@@ -189,5 +189,90 @@
     "warnings": [
       "Instinct will purchase without asking again if prices are unchanged. That is what \"go with A\" authorized."
     ]
+  },
+  {
+    "id": "instinct-014",
+    "agent": "instinct",
+    "timestamp": "2026-09-30T02:10:00.000Z",
+    "kind": "error",
+    "title": "Boston room sold out after you approved",
+    "summary": "The Medford room went between 5:38 PM and 10:10 PM. Flights ($511), the bus (US$24) and the Newark room ($389) were re-checked and still match.",
+    "sourceEvidence": "[10:10 PM] ERROR: The Medford room sold out since this afternoon. Flights (CA$511), the bus (US$23.98) and the Newark room (CA$389) all still match.",
+    "reasoning": "The agent did not substitute a room on its own. It stopped, reported the change, and queued a new decision. That is the autonomy boundary working: a different room is a choice the user never priced.",
+    "corrects": "instinct-010"
+  },
+  {
+    "id": "instinct-015",
+    "agent": "instinct",
+    "timestamp": "2026-09-30T02:10:00.000Z",
+    "kind": "decision",
+    "title": "Pick a replacement Boston room",
+    "summary": "Three private rooms for Oct 14 to 18. Two keep the trip under $1,500. Every other part of option A is unchanged.",
+    "sourceEvidence": "[10:10 PM] DECISION: Boston replacement, private rooms, Oct 14-18, trip totals all-in:\n1. Belmont, CA$509 → trip CA$1,442 (fits). Queen bed, 5.0 but only 5 reviews, ~38 min to downtown.\n2. Winthrop, CA$530 → trip CA$1,463 (fits). 4.75, only 4 reviews.\n3. Brighton \"Room C\", CA$571 → trip CA$1,504 ($4 over cap). 132 reviews, shared bath, ~49 min to downtown, free cancel before Oct 9.\nMy pick: Belmont. Cheapest, fits, private, shortest commute. The risk is thin reviews.\nDeadline: rooms are selling fast (Medford went in 5 hours).",
+    "links": [
+      "https://www.airbnb.ca/rooms/1705720868265246518"
+    ],
+    "reasoning": "The agent recommends Belmont: cheapest, fits, private, shortest commute of the three. It flags the risk itself: only 5 reviews.",
+    "confidence": "medium",
+    "urgencyNote": "Rooms are selling fast. The last one went in 5 hours.",
+    "warnings": [
+      "All three are 38 to 49 min from downtown. You asked for central and walkable.",
+      "Belmont and Winthrop have 5 and 4 reviews. Brighton has 132 but a shared bath."
+    ],
+    "options": [
+      {
+        "id": "1",
+        "label": "1. Belmont, private room, queen bed",
+        "total": 1442,
+        "costDelta": 0,
+        "fitsBudget": true,
+        "tradeoff": "Cheapest and shortest commute at about 38 min. Rated 5.0 from only 5 reviews.",
+        "recommended": true
+      },
+      {
+        "id": "2",
+        "label": "2. Winthrop, private room",
+        "total": 1463,
+        "costDelta": 21,
+        "fitsBudget": true,
+        "tradeoff": "$21 more than Belmont. Rated 4.75 from only 4 reviews. Commute not given."
+      },
+      {
+        "id": "3",
+        "label": "3. Brighton, Room C, shared bath",
+        "total": 1504,
+        "costDelta": 62,
+        "fitsBudget": false,
+        "tradeoff": "132 reviews and free cancellation before Oct 9, but a shared bath, about 49 min to downtown, and $4 over the cap."
+      }
+    ]
+  },
+  {
+    "id": "instinct-016",
+    "agent": "instinct",
+    "timestamp": "2026-09-30T02:11:00.000Z",
+    "kind": "decision",
+    "title": "How to pay: no card is saved",
+    "summary": "Instinct has no card on file. It offers per-purchase approval through a single-use card link, or saving a card through a secure link. It also needs an Airbnb login through a secure link, never in chat.",
+    "sourceEvidence": "[10:11 PM] DECISION: How do you want to pay? No card is saved yet.\n1. Link: you approve each purchase from your phone for the exact amount, and merchants only ever see a single-use card. 4 bookings = 4 quick approvals.\n2. Save a card through a secure link, and I pay with it after each price re-check.\nMy pick: Link, since you want to approve every purchase anyway.\nAlso, the Airbnb rooms need your Airbnb account. Do you have one? If yes, I'll send a secure link so you can save your login (never text it here).",
+    "reasoning": "The agent recommends per-purchase approval because the user said every purchase needs approval anyway. This means every booking will come back as its own approval on the phone.",
+    "warnings": [
+      "This step saves payment or login details. Do it through the secure link Instinct sends, never by typing card numbers or passwords into a chat or this page."
+    ],
+    "options": [
+      {
+        "id": "1",
+        "label": "1. Approve each purchase from your phone",
+        "costDelta": 0,
+        "tradeoff": "Four bookings means four quick approvals. Merchants see a single-use card each time.",
+        "recommended": true
+      },
+      {
+        "id": "2",
+        "label": "2. Save a card for the agent to use",
+        "costDelta": 0,
+        "tradeoff": "One setup, then the agent pays after each price re-check without asking again."
+      }
+    ]
   }
 ]

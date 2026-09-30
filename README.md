@@ -32,6 +32,8 @@ This loop closed during the build. At 10:02 PM I chose option A in the interface
 
 That reply is event 13 in the log, and the decision card now reads "Agent confirmed". Four minutes of latency, one manual paste, and the agent changed what it was doing because of a click in this interface.
 
+Then it got better. At 10:10 PM Instinct reported that the Boston room had sold out in the four hours since it priced the trip. It did not pick a replacement on its own. It re-verified everything else, queued a new decision with three rooms and their trip totals, and flagged the urgency: "rooms are selling fast, Medford went in 5 hours." At 10:11 PM it asked how I wanted to pay, because no card was saved. Both are live decision cards in the demo, with the room decision sorted first because of the urgency.
+
 ### Data
 
 Every event in `data/events.json` comes from the real transcript in `data/raw/instinct-transcript.txt`. The normalizer in `scripts/normalize.ts` does the mechanical split by tag and time. Structured fields like option totals, tradeoffs, and rule warnings are hand-written in `data/enrichments.json` and merged on top. The agent's verbatim text is never edited, and the normalizer refuses enrichments that try. Nothing is fabricated.
@@ -39,7 +41,7 @@ Every event in `data/events.json` comes from the real transcript in `data/raw/in
 ## Constraints hit, and what I did about each
 
 - **Instinct is chat-only.** No API, no export. Data is a pasted transcript, steering is a relay. I made the relay visible instead of hiding it: the card shows the exact message going back, which is what a user would want to see anyway.
-- **Instinct cannot hold fares.** Its decision came with "no deadline, nothing held", so the urgency sort had nothing to sort. The card says so in plain words rather than hiding the deadline chip.
+- **Instinct cannot hold fares, and its deadlines are vibes.** The first decision came with "no deadline, nothing held". The second came with "rooms are selling fast". Neither is a timestamp. The card shows a hard deadline as a countdown when there is one, the agent's own words when there is not, and sorts hard deadlines above soft ones.
 - **Instinct finished in 81 minutes, not 8 hours.** "Overnight" really means "the user was not watching". The interface does not care how long the agent worked, only what it left behind.
 - **It buried a decision inside an UPDATE.** At 5:05 PM it priced a later return flight (+$122) and reported it as information, never as a choice, even though I said I prefer later departures. The interface attaches a rule warning to that update. This is the strongest argument in this project for the interface deciding what needs the user, not the agent.
 - **It bent my rules to fit the budget** by picking a room in Newark, NJ, 50 minutes from Manhattan, and said so honestly in the middle of a long message. The interface pulls that out into the "Bends your rules" block at the top of the decision, above the options.
@@ -49,7 +51,7 @@ Every event in `data/events.json` comes from the real transcript in `data/raw/in
 ## Assumptions
 
 - The user checks the interface once, on a phone, with about 90 seconds of attention.
-- The agent has a card on file but was told not to purchase without approval. Every design choice about autonomy assumes the agent respects that rule.
+- I assumed the agent had a card on file, as the scenario says. It did not. Instinct only asked about payment at 10:11 PM, after I approved the trip. So the "never buy without approval" rule was never tested against a live card, and Instinct's own default, per-purchase approval from the phone, is stricter than the scenario's.
 - All amounts are CAD, because Instinct reported in CAD without being asked.
 - One agent. The event model has fields for cross-checking multiple agents, but the comparison view is not built. One solid agent with real data was worth more than two half-connected ones in the time available.
 

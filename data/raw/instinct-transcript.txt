@@ -32,3 +32,18 @@ Standard fare on Google Flights (the Basic fare is the same flights for CA$511):
 - NYC room (Newark): walk or short bus to Newark Penn, then PATH, about 50 min door to Manhattan. That's the real cost of the cheap NYC room.
 Totals and options unchanged. No action needed until morning.
 [10:06 PM] UPDATE: Going with A. I'll re-check each price first. If everything still matches and the total stays under $1,500, I book. If anything moved, you get a DECISION before I spend a cent.
+[10:10 PM] ERROR: The Medford room sold out since this afternoon. Flights (CA$511), the bus (US$23.98) and the Newark room (CA$389) all still match.
+[10:10 PM] DECISION: Boston replacement, private rooms, Oct 14-18, trip totals all-in:
+
+1. Belmont, CA$509 → trip CA$1,442 (fits). Queen bed, 5.0 but only 5 reviews, ~38 min to downtown.
+2. Winthrop, CA$530 → trip CA$1,463 (fits). 4.75, only 4 reviews.
+3. Brighton "Room C", CA$571 → trip CA$1,504 ($4 over cap). 132 reviews, shared bath, ~49 min to downtown, free cancel before Oct 9.
+
+My pick: Belmont. Cheapest, fits, private, shortest commute. The risk is thin reviews.
+Deadline: rooms are selling fast (Medford went in 5 hours).
+https://www.airbnb.ca/rooms/1705720868265246518
+[10:11 PM] DECISION: How do you want to pay? No card is saved yet.
+1. Link: you approve each purchase from your phone for the exact amount, and merchants only ever see a single-use card. 4 bookings = 4 quick approvals.
+2. Save a card through a secure link, and I pay with it after each price re-check.
+My pick: Link, since you want to approve every purchase anyway.
+Also, the Airbnb rooms need your Airbnb account. Do you have one? If yes, I'll send a secure link so you can save your login (never text it here).

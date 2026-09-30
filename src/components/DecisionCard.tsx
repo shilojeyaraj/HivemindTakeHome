@@ -33,8 +33,10 @@ export function DecisionCard({ event, budget }: { event: AgentEvent; budget: num
       <header>
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-zinc-500">
           <span>Asked at {clock(event.timestamp)}</span>
-          <span className={`rounded-full px-2 py-0.5 ${expired ? "bg-zinc-200 text-zinc-600 dark:bg-zinc-800" : event.deadline ? "bg-amber-100 text-amber-900 dark:bg-amber-950 dark:text-amber-200" : "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400"}`}>
-            {event.deadline ? (expired ? `Expired ${relative(event.deadline)}` : `Expires ${relative(event.deadline)}`) : "No deadline, nothing held"}
+          <span className={`rounded-full px-2 py-0.5 ${expired ? "bg-zinc-200 text-zinc-600 dark:bg-zinc-800" : event.deadline || event.urgencyNote ? "bg-amber-100 text-amber-900 dark:bg-amber-950 dark:text-amber-200" : "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400"}`}>
+            {event.deadline
+              ? expired ? `Expired ${relative(event.deadline)}` : `Expires ${relative(event.deadline)}`
+              : event.urgencyNote ?? "No deadline, nothing held"}
           </span>
         </div>
         <h3 className="mt-2 text-base font-semibold leading-snug">{event.title}</h3>

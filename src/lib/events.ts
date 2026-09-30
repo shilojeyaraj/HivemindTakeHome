@@ -30,10 +30,12 @@ export function pendingDecisions(
   return events
     .filter((e) => e.kind === "decision" && !resolved.has(e.id))
     .sort((a, b) => {
-      // Deadlines first, soonest first. Then newest.
+      // Hard deadlines first, soonest first. Then "hurry" without a time. Then newest.
       if (a.deadline && !b.deadline) return -1;
       if (!a.deadline && b.deadline) return 1;
       if (a.deadline && b.deadline) return a.deadline.localeCompare(b.deadline);
+      if (a.urgencyNote && !b.urgencyNote) return -1;
+      if (!a.urgencyNote && b.urgencyNote) return 1;
       return b.timestamp.localeCompare(a.timestamp);
     });
 }

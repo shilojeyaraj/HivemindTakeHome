@@ -37,6 +37,7 @@ export type AgentEvent = {
   sourceEvidence?: string; // verbatim excerpt from the agent transcript
   options?: DecisionOption[];
   deadline?: string; // ISO 8601, e.g. fare expiry
+  urgencyNote?: string; // when the agent says "hurry" without giving a time
   autoResolved?: AutoResolved;
   spendDelta?: number; // dollars committed by this event, if any
   confidence?: "high" | "medium" | "low";

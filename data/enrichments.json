@@ -114,5 +114,72 @@
     "warnings": [
       "Instinct will purchase without asking again if prices are unchanged. That is what \"go with A\" authorized."
     ]
+  },
+  "instinct-014": {
+    "title": "Boston room sold out after you approved",
+    "summary": "The Medford room went between 5:38 PM and 10:10 PM. Flights ($511), the bus (US$24) and the Newark room ($389) were re-checked and still match.",
+    "reasoning": "The agent did not substitute a room on its own. It stopped, reported the change, and queued a new decision. That is the autonomy boundary working: a different room is a choice the user never priced.",
+    "corrects": "instinct-010"
+  },
+  "instinct-015": {
+    "title": "Pick a replacement Boston room",
+    "summary": "Three private rooms for Oct 14 to 18. Two keep the trip under $1,500. Every other part of option A is unchanged.",
+    "reasoning": "The agent recommends Belmont: cheapest, fits, private, shortest commute of the three. It flags the risk itself: only 5 reviews.",
+    "confidence": "medium",
+    "urgencyNote": "Rooms are selling fast. The last one went in 5 hours.",
+    "warnings": [
+      "All three are 38 to 49 min from downtown. You asked for central and walkable.",
+      "Belmont and Winthrop have 5 and 4 reviews. Brighton has 132 but a shared bath."
+    ],
+    "options": [
+      {
+        "id": "1",
+        "label": "1. Belmont, private room, queen bed",
+        "total": 1442,
+        "costDelta": 0,
+        "fitsBudget": true,
+        "tradeoff": "Cheapest and shortest commute at about 38 min. Rated 5.0 from only 5 reviews.",
+        "recommended": true
+      },
+      {
+        "id": "2",
+        "label": "2. Winthrop, private room",
+        "total": 1463,
+        "costDelta": 21,
+        "fitsBudget": true,
+        "tradeoff": "$21 more than Belmont. Rated 4.75 from only 4 reviews. Commute not given."
+      },
+      {
+        "id": "3",
+        "label": "3. Brighton, Room C, shared bath",
+        "total": 1504,
+        "costDelta": 62,
+        "fitsBudget": false,
+        "tradeoff": "132 reviews and free cancellation before Oct 9, but a shared bath, about 49 min to downtown, and $4 over the cap."
+      }
+    ]
+  },
+  "instinct-016": {
+    "title": "How to pay: no card is saved",
+    "summary": "Instinct has no card on file. It offers per-purchase approval through a single-use card link, or saving a card through a secure link. It also needs an Airbnb login through a secure link, never in chat.",
+    "reasoning": "The agent recommends per-purchase approval because the user said every purchase needs approval anyway. This means every booking will come back as its own approval on the phone.",
+    "warnings": [
+      "This step saves payment or login details. Do it through the secure link Instinct sends, never by typing card numbers or passwords into a chat or this page."
+    ],
+    "options": [
+      {
+        "id": "1",
+        "label": "1. Approve each purchase from your phone",
+        "costDelta": 0,
+        "tradeoff": "Four bookings means four quick approvals. Merchants see a single-use card each time.",
+        "recommended": true
+      },
+      {
+        "id": "2",
+        "label": "2. Save a card for the agent to use",
+        "costDelta": 0,
+        "tradeoff": "One setup, then the agent pays after each price re-check without asking again."
+      }
+    ]
   }
 }
