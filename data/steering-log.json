@@ -1,0 +1,20 @@
+[
+  {
+    "eventId": "instinct-010",
+    "action": "approve",
+    "optionId": "A",
+    "at": "2026-09-30T02:02:25.195Z",
+    "relayMessage": "Re \"Full trip priced: 4 options, 2 fit the budget\": go with A. Basic fare, private rooms in both cities.",
+    "relayStatus": "acknowledged",
+    "acknowledgedAt": "2026-09-30T02:06:00.000Z"
+  },
+  {
+    "eventId": "instinct-015",
+    "action": "approve",
+    "optionId": "2",
+    "at": "2026-09-30T02:13:06.601Z",
+    "relayMessage": "Re \"Pick a replacement Boston room\": go with 2. Winthrop, private room.",
+    "relayStatus": "acknowledged",
+    "acknowledgedAt": "2026-09-30T02:43:00.000Z"
+  }
+]
