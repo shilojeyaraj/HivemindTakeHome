@@ -4,6 +4,7 @@
    the primary action only, cream for secondary surfaces, maroon for the
    serious stuff. Pills for buttons and tags, small radii elsewhere, no shadows. */
 :root {
+  color-scheme: light;
   --bg: #ffffff;
   --surface: #ffffff;
   --cream: #f8f5f0;
@@ -23,8 +24,10 @@
   --wash: linear-gradient(180deg, #fff4ea 0%, #ffffff 100%);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
+/* Light is the default everywhere. Dark only when the page opts in with
+   <html data-theme="dark">, never from the system setting. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
     --bg: #161618;
     --surface: #1d1d20;
     --cream: #232326;
@@ -42,7 +45,6 @@
     --ok: #6fd39a;
     --ok-soft: #16301f;
     --wash: linear-gradient(180deg, #24201d 0%, #161618 100%);
-  }
 }
 
 @theme inline {
