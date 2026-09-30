@@ -3,7 +3,7 @@
 Shilo Jeyarajasingam, University of Waterloo. Hivemind Winter '27 co-op take-home, September 30, 2026.
 
 - Working demo: https://hivemind-take-home.vercel.app
-- Loom walkthrough: (link)
+- Loom walkthrough: https://www.loom.com/share/1ebc729b14af44ccb9f6bbfce3a24399
 - Repo: https://github.com/shilojeyaraj/HivemindTakeHome
 
 ## 1. How it works

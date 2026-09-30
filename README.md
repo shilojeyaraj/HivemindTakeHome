@@ -3,7 +3,7 @@
 A supervision interface for a persistent AI agent that planned a multi-city trip while its user was away. Built for the Hivemind Winter '27 co-op take-home.
 
 - **Working demo:** https://hivemind-take-home.vercel.app
-- **Loom walkthrough:** (link)
+- **Loom walkthrough:** https://www.loom.com/share/1ebc729b14af44ccb9f6bbfce3a24399
 - **Full write-up:** [docs/WRITEUP.md](docs/WRITEUP.md)
 
 ## Documentation map
