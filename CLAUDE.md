@@ -72,7 +72,7 @@ Underlying theme: **trust, delegation, and what a person needs to feel in contro
 
 - Intended effort: **4 to 6 hours**
 - Submit to: maggie@hivemind.ai and jason@hivemind.ai
-- Original deadline: Monday, September 28, 12 PM EST. **Extension requested** (email missed due to junk folder) for end of day Tuesday Sept 29 or Wednesday Sept 30. Confirm the final deadline from Maggie's reply.
+- **Deadline: end of day Wednesday, September 30, 2026** (extension confirmed by Maggie; original was Monday Sept 28). Aim to submit Tuesday night or Wednesday morning.
 - Strong submissions get a final interview with the team the following week.
 
 ## Build Plan
