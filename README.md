@@ -34,6 +34,8 @@ That reply is event 13 in the log, and the decision card now reads "Agent confir
 
 Then it got better. At 10:10 PM Instinct reported that the Boston room had sold out in the four hours since it priced the trip. It did not pick a replacement on its own. It re-verified everything else, queued a new decision with three rooms and their trip totals, and flagged the urgency: "rooms are selling fast, Medford went in 5 hours." At 10:11 PM it asked how I wanted to pay, because no card was saved. Both are live decision cards in the demo, with the room decision sorted first because of the urgency.
 
+The loop closed a second time. I chose Winthrop in the interface at 10:13 PM and relayed it. At 10:43 PM Instinct confirmed: "Winthrop is locked in (trip total ~CA$1,463)." The brief now shows "Approved, not booked: $1,463, $37 under", because approved is not the same as bought, and the interface keeps those separate.
+
 ### Data
 
 Every event in `data/events.json` comes from the real transcript in `data/raw/instinct-transcript.txt`. The normalizer in `scripts/normalize.ts` does the mechanical split by tag and time. Structured fields like option totals, tradeoffs, and rule warnings are hand-written in `data/enrichments.json` and merged on top. The agent's verbatim text is never edited, and the normalizer refuses enrichments that try. Nothing is fabricated.

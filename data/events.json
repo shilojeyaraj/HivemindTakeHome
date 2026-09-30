@@ -274,5 +274,16 @@
         "tradeoff": "One setup, then the agent pays after each price re-check without asking again."
       }
     ]
+  },
+  {
+    "id": "instinct-017",
+    "agent": "instinct",
+    "timestamp": "2026-09-30T02:43:00.000Z",
+    "kind": "update",
+    "title": "Agent confirmed Winthrop, trip total about $1,463",
+    "summary": "Reply to the room choice made in this interface. Nothing is booked yet. Instinct still needs a payment method and an Airbnb login before it can book.",
+    "sourceEvidence": "[10:43 PM] UPDATE: Got it, Winthrop is locked in (trip total ~CA$1,463). To book, I still need two answers: Link or a saved card for payment, and whether you have an Airbnb account.",
+    "reasoning": "Second time the steering loop closed. The user chose option 2 in the interface, the message was relayed to Instinct's chat, and Instinct confirmed with the new total.",
+    "corrects": "instinct-015"
   }
 ]

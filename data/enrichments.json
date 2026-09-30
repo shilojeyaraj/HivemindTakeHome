@@ -181,5 +181,11 @@
         "tradeoff": "One setup, then the agent pays after each price re-check without asking again."
       }
     ]
+  },
+  "instinct-017": {
+    "title": "Agent confirmed Winthrop, trip total about $1,463",
+    "summary": "Reply to the room choice made in this interface. Nothing is booked yet. Instinct still needs a payment method and an Airbnb login before it can book.",
+    "reasoning": "Second time the steering loop closed. The user chose option 2 in the interface, the message was relayed to Instinct's chat, and Instinct confirmed with the new total.",
+    "corrects": "instinct-015"
   }
 }

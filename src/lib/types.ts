@@ -63,7 +63,8 @@ export type SteeringAction = {
 export type TripBrief = {
   budget: number;
   committed: number; // dollars already spent or held
-  pending: number; // dollars that would be spent if recommended options are approved
+  pending: number; // projected trip total from the latest approved or recommended option
+  pendingSource?: "approved" | "recommended";
   decisionsWaiting: number;
   urgentDecisions: number; // decisions with a deadline in the next 2 hours
   errors: number;
