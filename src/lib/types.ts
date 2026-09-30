@@ -56,6 +56,7 @@ export type SteeringAction = {
   at: string; // ISO 8601
   relayMessage: string; // exact text sent back to the agent's chat
   relayStatus: "pending" | "sent" | "acknowledged";
+  acknowledgedAt?: string; // ISO 8601, when the agent replied
 };
 
 export type TripBrief = {

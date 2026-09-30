@@ -26,7 +26,11 @@ Instinct has no API, no webhooks, and no export. It only talks over iMessage. So
 
 After a decision is made it moves to a "You decided" section with its relay status, so the user can see what they told the agent and whether it has confirmed. The deployed demo starts with no decisions made, so you can make the choice yourself. The steering log is local state; on Vercel it lives only for the request.
 
-(Screenshot of Instinct's reply to the relayed message goes here.)
+This loop closed during the build. At 10:02 PM I chose option A in the interface. I pasted the message it composed into Instinct's chat. At 10:06 PM Instinct replied:
+
+> [10:06 PM] UPDATE: Going with A. I'll re-check each price first. If everything still matches and the total stays under $1,500, I book. If anything moved, you get a DECISION before I spend a cent.
+
+That reply is event 13 in the log, and the decision card now reads "Agent confirmed". Four minutes of latency, one manual paste, and the agent changed what it was doing because of a click in this interface.
 
 ### Data
 

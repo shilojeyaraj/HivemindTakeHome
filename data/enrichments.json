@@ -7,7 +7,9 @@
     "title": "Found nonstop flights for about $511",
     "summary": "Air Canada nonstops both ways: Toronto to LaGuardia Oct 10 at 4:35 PM, Boston to Billy Bishop Oct 18 at 9:40 AM. A 12:45 PM return instead would add about $122. Bag and seat fees not included yet.",
     "reasoning": "The agent priced a later return but reported it as information rather than as a choice. The interface treats this as a tradeoff the user may want to reopen, since the user said they prefer later departures.",
-    "warnings": ["Return is a 9:40 AM flight. You said you prefer later departures. The later one costs about $122 more."]
+    "warnings": [
+      "Return is a 9:40 AM flight. You said you prefer later departures. The later one costs about $122 more."
+    ]
   },
   "instinct-003": {
     "title": "Chose a 4 night / 4 night split with a bus between cities",
@@ -104,5 +106,13 @@
     "title": "Verified commute times",
     "summary": "Boston room: 4 to 5 min walk to Ball Square, about 30 min to downtown. NYC room in Newark: about 50 min door to Manhattan by PATH. Options and totals unchanged.",
     "corrects": "instinct-010"
+  },
+  "instinct-013": {
+    "title": "Agent confirmed option A and is re-checking prices",
+    "summary": "Reply to the choice made in this interface at 10:02 PM. It will re-verify every price, book only if the total is still under $1,500, and come back with a DECISION if anything moved.",
+    "reasoning": "This is the steering loop closing. The user chose A in the interface, the message was relayed to Instinct's chat, and Instinct acknowledged it four minutes later with its own safety check before spending.",
+    "warnings": [
+      "Instinct will purchase without asking again if prices are unchanged. That is what \"go with A\" authorized."
+    ]
   }
 }
