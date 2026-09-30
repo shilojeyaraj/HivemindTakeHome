@@ -1,12 +1,23 @@
 import type { AgentEvent } from "@/lib/types";
 
+// The agent's own tag, shown as the agent wrote it. Mono, like a severity label.
+export function Tag({ event }: { event: AgentEvent }) {
+  const isCorrection = event.corrects && event.kind === "error";
+  const text = isCorrection ? "CORRECTION" : event.kind === "update" ? "UPDATE" : event.kind === "decision" ? "DECISION" : event.kind === "auto_action" ? "AUTO" : "ERROR";
+  const cls =
+    event.kind === "error" ? "bg-maroon-soft text-maroon" : event.kind === "auto_action" ? "bg-orange-soft text-orange" : event.kind === "decision" ? "bg-ink text-bg" : "bg-cream text-ink-2";
+  return <span className={`tag ${cls}`}>{text}</span>;
+}
+
 export function Warnings({ warnings }: { warnings?: string[] }) {
   if (!warnings?.length) return null;
   return (
-    <div className="mt-3 rounded-lg border border-accent-line bg-accent-bg px-3 py-2 text-sm">
-      <div className="text-[11px] font-semibold uppercase tracking-wider text-accent">Bends your rules</div>
-      <ul className="mt-1 list-disc space-y-1 pl-4 text-ink">
-        {warnings.map((w) => <li key={w}>{w}</li>)}
+    <div className="mt-3 rounded-md bg-maroon-soft px-3 py-2.5 text-sm text-ink">
+      <div className="text-xs font-semibold text-maroon">Bends your rules</div>
+      <ul className="mt-1 space-y-1">
+        {warnings.map((w) => (
+          <li key={w} className="flex gap-2"><span className="text-maroon">&bull;</span><span>{w}</span></li>
+        ))}
       </ul>
     </div>
   );
@@ -20,7 +31,7 @@ export function Links({ links }: { links?: string[] }) {
         const host = new URL(l).hostname.replace(/^(www|shop)\./, "");
         return (
           <li key={l}>
-            <a href={l} target="_blank" rel="noreferrer" className="rounded-md border border-line bg-surface px-2 py-1 text-xs text-ink-2 hover:border-line-strong">
+            <a href={l} target="_blank" rel="noreferrer" className="rounded-full bg-cream px-3 py-1 text-xs font-medium text-ink hover:bg-cream-2">
               Open on {host}
             </a>
           </li>
@@ -33,11 +44,15 @@ export function Links({ links }: { links?: string[] }) {
 export function RawEvidence({ event, label = "What the agent actually said" }: { event: AgentEvent; label?: string }) {
   if (!event.reasoning && !event.sourceEvidence) return null;
   return (
-    <details className="mt-3 text-sm">
-      <summary className="cursor-pointer text-muted hover:text-ink">{label}</summary>
+    <details className="group mt-3 text-sm">
+      <summary className="inline-flex cursor-pointer items-center gap-1.5 text-muted hover:text-ink">
+        <span className="inline-block w-3 text-center group-open:hidden">+</span>
+        <span className="hidden w-3 text-center group-open:inline-block">&ndash;</span>
+        {label}
+      </summary>
       {event.reasoning && <p className="mt-2 text-ink-2">{event.reasoning}</p>}
       {event.sourceEvidence && (
-        <blockquote className="mt-2 whitespace-pre-wrap rounded-md bg-surface-2 px-3 py-2 font-mono text-xs leading-relaxed text-ink-2">
+        <blockquote className="mt-2 whitespace-pre-wrap rounded-md bg-cream px-3 py-2 font-mono text-xs leading-relaxed text-ink-2">
           {event.sourceEvidence}
         </blockquote>
       )}

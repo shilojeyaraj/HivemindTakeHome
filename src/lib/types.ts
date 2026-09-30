@@ -56,7 +56,9 @@ export type SteeringAction = {
   note?: string;
   at: string; // ISO 8601
   relayMessage: string; // exact text sent back to the agent's chat
-  relayStatus: "pending" | "sent" | "acknowledged";
+  // pending: recorded here. sent: relayed to the agent. acknowledged: agent
+  // replied. applied: agent did it. failed: agent could not or would not.
+  relayStatus: "pending" | "sent" | "acknowledged" | "applied" | "failed";
   acknowledgedAt?: string; // ISO 8601, when the agent replied
 };
 

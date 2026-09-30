@@ -1,106 +1,97 @@
 @import "tailwindcss";
 
-/* One small token set. Light is warm paper, dark is deep ink. One accent for
-   attention (amber), one for "fits" (green), one for problems (red). */
+/* Palette after incident.io: white page, near-black ink, one vivid orange for
+   the primary action only, cream for secondary surfaces, maroon for the
+   serious stuff. Pills for buttons and tags, small radii elsewhere, no shadows. */
 :root {
-  --bg: #f5f2ec;
+  --bg: #ffffff;
   --surface: #ffffff;
-  --surface-2: #f0ede6;
-  --ink: #1c1b18;
-  --ink-2: #4f4c45;
-  --muted: #7d796f;
-  --line: #e2ddd2;
-  --line-strong: #1c1b18;
-  --accent: #b45309;
-  --accent-bg: #fdf3e3;
-  --accent-line: #f2c98a;
-  --ok: #047857;
-  --ok-bg: #e6f5ee;
-  --bad: #b42318;
-  --bad-bg: #fbeae8;
-  --bad-line: #f3b5ad;
+  --cream: #f8f5f0;
+  --cream-2: #f1ebe2;
+  --ink: #161618;
+  --ink-2: #4b4b50;
+  --muted: #7d7d84;
+  --line: #e8e6e1;
+  --line-strong: #161618;
+  --orange: #f25533;
+  --orange-ink: #ffffff;
+  --orange-soft: #fdece7;
+  --maroon: #5a0a17;
+  --maroon-soft: #f7e9ec;
+  --ok: #1d7a4b;
+  --ok-soft: #e7f4ec;
+  --wash: linear-gradient(180deg, #fff4ea 0%, #ffffff 100%);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0e1013;
-    --surface: #171a1f;
-    --surface-2: #1f232a;
-    --ink: #ece9e2;
-    --ink-2: #bdb8ad;
-    --muted: #8d897f;
-    --line: #2a2e36;
-    --line-strong: #ece9e2;
-    --accent: #f5b04c;
-    --accent-bg: #2a2010;
-    --accent-line: #6b4a12;
-    --ok: #4ade80;
-    --ok-bg: #10261b;
-    --bad: #f87171;
-    --bad-bg: #2b1414;
-    --bad-line: #7a2a2a;
+    --bg: #161618;
+    --surface: #1d1d20;
+    --cream: #232326;
+    --cream-2: #2b2b2f;
+    --ink: #f4f2ee;
+    --ink-2: #bdbbb5;
+    --muted: #8b8a86;
+    --line: #2e2e33;
+    --line-strong: #f4f2ee;
+    --orange: #f25533;
+    --orange-ink: #ffffff;
+    --orange-soft: #3a1e17;
+    --maroon: #f0a3ad;
+    --maroon-soft: #3a1a20;
+    --ok: #6fd39a;
+    --ok-soft: #16301f;
+    --wash: linear-gradient(180deg, #24201d 0%, #161618 100%);
   }
 }
 
 @theme inline {
   --color-bg: var(--bg);
   --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
+  --color-cream: var(--cream);
+  --color-cream-2: var(--cream-2);
   --color-ink: var(--ink);
   --color-ink-2: var(--ink-2);
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
-  --color-accent: var(--accent);
-  --color-accent-bg: var(--accent-bg);
-  --color-accent-line: var(--accent-line);
+  --color-orange: var(--orange);
+  --color-orange-ink: var(--orange-ink);
+  --color-orange-soft: var(--orange-soft);
+  --color-maroon: var(--maroon);
+  --color-maroon-soft: var(--maroon-soft);
   --color-ok: var(--ok);
-  --color-ok-bg: var(--ok-bg);
-  --color-bad: var(--bad);
-  --color-bad-bg: var(--bad-bg);
-  --color-bad-line: var(--bad-line);
+  --color-ok-soft: var(--ok-soft);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-serif);
 }
 
-html {
-  background: var(--bg);
-  color: var(--ink);
-}
-
+html { background: var(--bg); color: var(--ink); }
 body {
-  background: var(--bg);
+  background: var(--wash);
+  background-repeat: no-repeat;
+  background-size: 100% 420px;
   color: var(--ink);
-  font-feature-settings: "tnum" 1, "cv11" 1;
 }
 
-.num {
-  font-variant-numeric: tabular-nums;
+.num { font-variant-numeric: tabular-nums; }
+.serif { font-family: var(--font-serif), Georgia, serif; }
+
+/* Agent tags, in the agent's own words, mono like a severity label */
+.tag {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  padding: 4px 7px;
+  border-radius: 999px;
+  white-space: nowrap;
 }
 
-details > summary {
-  list-style: none;
-}
-details > summary::-webkit-details-marker {
-  display: none;
-}
-details > summary::before {
-  content: "+";
-  display: inline-block;
-  width: 1em;
-  color: var(--muted);
-}
-details[open] > summary::before {
-  content: "\2013";
-}
+details > summary { list-style: none; }
+details > summary::-webkit-details-marker { display: none; }
 
-@keyframes rise {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: none; }
-}
-.rise {
-  animation: rise 180ms ease-out both;
-}
-@media (prefers-reduced-motion: reduce) {
-  .rise { animation: none; }
-}
+@keyframes rise { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.rise { animation: rise 180ms ease-out both; }
+@media (prefers-reduced-motion: reduce) { .rise { animation: none; } }

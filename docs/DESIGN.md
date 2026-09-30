@@ -28,6 +28,16 @@ Errors and irreversible auto-actions, pulled out of the log so they are not buri
 ### Overnight log
 Everything, chronological. Same cards as the timeline, with reasoning and raw text behind a disclosure.
 
+## Three kinds of moment, not two
+
+LangChain's ambient-agents work splits human-in-the-loop into notify, question, and review. The assessment asks for two moment types, but the run produced all three, and the interface treats them differently:
+
+- **Notify**: the agent did something or learned something; nothing to do. UPDATE and reversible AUTO messages. Shown in the log, and pulled out under "Decided on its own" when the agent chose something.
+- **Question**: the agent needs an answer it cannot guess. "How do you want to pay?" at 10:11 PM. A decision card with options, but no money on the options.
+- **Review**: the agent has a proposal with a cost and wants approval. The 5:38 PM and 10:10 PM decisions. A decision card with totals against the budget and the agent's pick marked.
+
+The 3 AM layover is a review with a deadline, not a question. The distinction matters for the autonomy boundary: questions can never be auto-resolved, reviews can once trust is earned.
+
 ## Event model
 
 See `src/lib/types.ts`. The important fields:

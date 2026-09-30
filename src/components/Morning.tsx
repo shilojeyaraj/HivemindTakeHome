@@ -97,19 +97,18 @@ export function Morning({ events, serverSteering }: { events: AgentEvent[]; serv
 
   return (
     <>
-      <nav className="sticky top-0 z-10 -mx-4 mb-2 flex gap-2 overflow-x-auto border-b border-line bg-bg/90 px-4 py-2 text-xs backdrop-blur sm:hidden">
-        <Jump href="#needs-you" label="Needs you" count={decisions.length} tone={decisions.length ? "accent" : undefined} />
-        <Jump href="#problems" label="Problems" count={problems.length} tone={problems.length ? "bad" : undefined} />
+      <nav className="sticky top-0 z-10 -mx-4 flex gap-2 overflow-x-auto bg-bg/85 px-4 py-2 text-xs backdrop-blur sm:hidden">
+        <Jump href="#needs-you" label="Needs you" count={decisions.length} tone={decisions.length ? "orange" : undefined} />
+        <Jump href="#problems" label="Problems" count={problems.length} tone={problems.length ? "maroon" : undefined} />
         <Jump href="#alone" label="Decided alone" count={autos.length} />
         <Jump href="#log" label="Log" count={events.length} />
       </nav>
 
       <Brief brief={brief} />
 
-      <section id="needs-you" className="scroll-mt-14">
-        <h2 className="mb-3 text-lg font-semibold tracking-tight">Needs you ({decisions.length})</h2>
+      <Section id="needs-you" title="Needs you" count={decisions.length}>
         {decisions.length === 0 ? (
-          <p className="rounded-2xl border border-dashed border-line px-4 py-6 text-center text-sm text-muted">Nothing waiting on you.</p>
+          <p className="rounded-md border border-dashed border-line px-4 py-6 text-center text-sm text-muted">Nothing waiting on you.</p>
         ) : (
           <div className="space-y-4">
             {decisions.map((d) => (
@@ -117,45 +116,49 @@ export function Morning({ events, serverSteering }: { events: AgentEvent[]; serv
             ))}
           </div>
         )}
-      </section>
+      </Section>
 
       {steering.length > 0 && (
-        <section>
-          <h2 className="mb-1 text-lg font-semibold tracking-tight">You decided ({steering.length})</h2>
-          <p className="mb-3 text-sm text-muted">Instinct has no API, so each decision becomes a chat message. Status updates when the agent replies.</p>
+        <Section title="You decided" count={steering.length} sub="Instinct has no API, so each decision becomes a chat message. Status updates when the agent replies.">
           <Decided events={events} steering={steering} />
-        </section>
+        </Section>
       )}
 
       {problems.length > 0 && (
-        <section id="problems" className="scroll-mt-14">
-          <h2 className="mb-1 text-lg font-semibold tracking-tight">Problems it hit ({problems.length})</h2>
-          <p className="mb-3 text-sm text-muted">Things that went wrong or that the agent could not verify. Worth reading before you choose.</p>
+        <Section id="problems" title="Problems it hit" count={problems.length} sub="Things that went wrong or that the agent could not verify. Worth reading before you choose.">
           <Timeline events={problems} all={events} />
-        </section>
+        </Section>
       )}
 
       {autos.length > 0 && (
-        <section id="alone" className="scroll-mt-14">
-          <h2 className="mb-1 text-lg font-semibold tracking-tight">Decided on its own ({autos.length})</h2>
-          <p className="mb-3 text-sm text-muted">Reversible choices the agent made without asking. Redirect any of them from a decision above.</p>
+        <Section id="alone" title="Decided on its own" count={autos.length} sub="Reversible choices the agent made without asking. Redirect any of them from a decision above.">
           <Timeline events={autos} all={events} />
-        </section>
+        </Section>
       )}
 
-      <section id="log" className="scroll-mt-14">
-        <h2 className="mb-1 text-lg font-semibold tracking-tight">Everything, in order ({events.length})</h2>
-        <p className="mb-3 text-sm text-muted">Every message, one line each. Tap one for the agent&apos;s exact words.</p>
+      <Section id="log" title="The whole night" count={events.length} sub="Every message in order. Tap one for the agent's exact words.">
         <LogList events={events} />
-      </section>
+      </Section>
     </>
   );
 }
 
-function Jump({ href, label, count, tone }: { href: string; label: string; count: number; tone?: "accent" | "bad" }) {
-  const cls = tone === "accent" ? "border-accent-line bg-accent-bg text-accent" : tone === "bad" ? "border-bad-line bg-bad-bg text-bad" : "border-line bg-surface text-ink-2";
+function Section({ id, title, count, sub, children }: { id?: string; title: string; count: number; sub?: string; children: React.ReactNode }) {
   return (
-    <a href={href} className={`shrink-0 rounded-full border px-3 py-1 font-medium ${cls}`}>
+    <section id={id} className="scroll-mt-12">
+      <h2 className="serif text-[28px] leading-none">
+        {title} <span className="num text-muted">{count}</span>
+      </h2>
+      {sub && <p className="mt-1.5 text-sm text-muted">{sub}</p>}
+      <div className="mt-4">{children}</div>
+    </section>
+  );
+}
+
+function Jump({ href, label, count, tone }: { href: string; label: string; count: number; tone?: "orange" | "maroon" }) {
+  const cls = tone === "orange" ? "bg-orange-soft text-orange" : tone === "maroon" ? "bg-maroon-soft text-maroon" : "bg-cream text-ink-2";
+  return (
+    <a href={href} className={`shrink-0 rounded-full px-3 py-1.5 font-medium ${cls}`}>
       {label} <span className="num">{count}</span>
     </a>
   );
