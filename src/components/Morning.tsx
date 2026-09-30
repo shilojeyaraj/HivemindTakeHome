@@ -97,8 +97,10 @@ export function Morning({ events, serverSteering }: { events: AgentEvent[]; serv
 
   return (
     <>
-      <nav className="sticky top-0 z-10 -mx-4 flex gap-2 overflow-x-auto bg-bg/90 px-4 py-2 text-xs backdrop-blur [scrollbar-width:none] sm:hidden [&::-webkit-scrollbar]:hidden">
+      <nav aria-label="Sections" className="sticky top-0 z-10 -mx-4 flex items-center gap-2 overflow-x-auto border-b border-line bg-bg/90 px-4 py-2 text-xs backdrop-blur [scrollbar-width:none] sm:-mx-0 sm:rounded-full sm:border sm:px-2 sm:py-1.5 [&::-webkit-scrollbar]:hidden">
+        <Jump href="#top" label="Brief" />
         <Jump href="#needs-you" label="Needs you" count={decisions.length} tone={decisions.length ? "orange" : undefined} />
+        {steering.length > 0 && <Jump href="#decided" label="You decided" count={steering.length} />}
         <Jump href="#problems" label="Problems" count={problems.length} tone={problems.length ? "maroon" : undefined} />
         <Jump href="#alone" label="Decided alone" count={autos.length} />
         <Jump href="#log" label="Log" count={events.length} />
@@ -119,7 +121,7 @@ export function Morning({ events, serverSteering }: { events: AgentEvent[]; serv
       </Section>
 
       {steering.length > 0 && (
-        <Section title="You decided" count={steering.length} sub="Instinct has no API, so each decision becomes a chat message. Status updates when the agent replies.">
+        <Section id="decided" title="You decided" count={steering.length} sub="Instinct has no API, so each decision becomes a chat message. Status updates when the agent replies.">
           <Decided events={events} steering={steering} />
         </Section>
       )}
@@ -155,11 +157,11 @@ function Section({ id, title, count, sub, children }: { id?: string; title: stri
   );
 }
 
-function Jump({ href, label, count, tone }: { href: string; label: string; count: number; tone?: "orange" | "maroon" }) {
-  const cls = tone === "orange" ? "bg-orange-soft text-orange" : tone === "maroon" ? "bg-maroon-soft text-maroon" : "bg-cream text-ink-2";
+function Jump({ href, label, count, tone }: { href: string; label: string; count?: number; tone?: "orange" | "maroon" }) {
+  const cls = tone === "orange" ? "bg-orange-soft text-orange hover:brightness-95" : tone === "maroon" ? "bg-maroon-soft text-maroon hover:brightness-95" : "bg-cream text-ink-2 hover:bg-cream-2 hover:text-ink";
   return (
-    <a href={href} className={`inline-flex min-h-9 shrink-0 items-center gap-1.5 rounded-full px-3.5 font-medium ${cls}`}>
-      {label} <span className="num">{count}</span>
+    <a href={href} className={`inline-flex min-h-9 shrink-0 items-center gap-1.5 rounded-full px-3.5 font-medium transition sm:min-h-8 ${cls}`}>
+      {label}{count !== undefined && <span className="num">{count}</span>}
     </a>
   );
 }
