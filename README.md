@@ -5,6 +5,8 @@ A supervision interface for a persistent AI agent that planned a multi-city trip
 - Demo: https://hivemind-take-home.vercel.app
 - Loom: (link)
 - Design doc with the full reasoning: [docs/DESIGN.md](docs/DESIGN.md)
+- How latency was cut and how the rest is shown: [docs/LATENCY.md](docs/LATENCY.md)
+- Design choices and theming: [docs/THEME.md](docs/THEME.md)
 
 ## How it works
 
