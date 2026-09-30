@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local steering state; the deployed demo starts with no decisions made
+/data/steering-log.json

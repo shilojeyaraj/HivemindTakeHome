@@ -15,7 +15,11 @@ export function loadEvents(): AgentEvent[] {
 export function loadSteering(): SteeringAction[] {
   const file = path.join(DATA_DIR, "steering-log.json");
   if (!fs.existsSync(file)) return [];
-  return JSON.parse(fs.readFileSync(file, "utf8")) as SteeringAction[];
+  try {
+    return JSON.parse(fs.readFileSync(file, "utf8")) as SteeringAction[];
+  } catch {
+    return [];
+  }
 }
 
 export function pendingDecisions(

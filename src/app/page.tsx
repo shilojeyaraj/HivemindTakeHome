@@ -2,6 +2,7 @@ import { Brief } from "@/components/Brief";
 import { DecisionCard } from "@/components/DecisionCard";
 import { Timeline } from "@/components/Timeline";
 import { LogList } from "@/components/LogList";
+import { Decided } from "@/components/Decided";
 import { BUDGET, buildBrief, loadEvents, loadSteering, pendingDecisions } from "@/lib/events";
 
 export const dynamic = "force-dynamic";
@@ -35,6 +36,14 @@ export default function Home() {
           <div className="space-y-4">{decisions.map((d) => <DecisionCard key={d.id} event={d} budget={BUDGET} />)}</div>
         )}
       </section>
+
+      {steering.length > 0 && (
+        <section>
+          <h2 className="mb-1 text-lg font-semibold">You decided ({steering.length})</h2>
+          <p className="mb-3 text-sm text-zinc-500">Instinct has no API, so each decision becomes a chat message. Status updates when the agent replies.</p>
+          <Decided events={events} steering={steering} />
+        </section>
+      )}
 
       {problems.length > 0 && (
         <section>

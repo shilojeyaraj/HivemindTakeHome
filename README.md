@@ -24,6 +24,8 @@ Top to bottom, in the order I need it:
 
 Instinct has no API, no webhooks, and no export. It only talks over iMessage. So when I choose an option, the interface records the decision and composes the message that goes back to the agent, then shows it on the card as "Sent to agent, waiting for it to confirm". In this demo I relay that message to Instinct by hand. With an agent that exposed an API, the same record would be an HTTP call and the card would move to "confirmed" on its own. The UI already carries that state.
 
+After a decision is made it moves to a "You decided" section with its relay status, so the user can see what they told the agent and whether it has confirmed. The deployed demo starts with no decisions made, so you can make the choice yourself. The steering log is local state; on Vercel it lives only for the request.
+
 (Screenshot of Instinct's reply to the relayed message goes here.)
 
 ### Data
